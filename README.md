@@ -1,2 +1,2 @@
 # cloudbills.ai
-Cloud bill anylyser with ai
+Analyse cloud bills with ai
