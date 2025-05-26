@@ -19,7 +19,7 @@ class Settings(BaseSettings):
     AWS_ACCESS_KEY_ID: Optional[str] = None
     AWS_SECRET_ACCESS_KEY: Optional[str] = None
     AWS_REGION: str = "ap-southeast-1"
-    AWS_PROFILE: Optional[str] = "dev"  # Add AWS profile support
+    AWS_PROFILE: Optional[str] = "doit"  # Add AWS profile support
     
     # Cache Settings
     CACHE_TTL: int = 3600  # 1 hour in seconds
