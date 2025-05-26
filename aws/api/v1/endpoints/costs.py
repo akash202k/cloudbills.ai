@@ -5,6 +5,7 @@ import logging
 from aws.models.cost import CostSummaryRequest, CostSummaryResponse
 from aws.services.cost_explorer import CostExplorerService
 from aws.config import get_settings
+import os
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
@@ -13,7 +14,9 @@ logger = logging.getLogger(__name__)
 async def verify_api_key(x_api_key: str = Header(...)):
     """Verify API key from request header."""
     settings = get_settings()
-    if x_api_key != settings.API_KEY:
+    # print(x_api_key)
+    # print(os.environ['API_KEY'])
+    if x_api_key != os.environ['API_KEY']:
         raise HTTPException(
             status_code=401,
             detail="Invalid API key"
@@ -25,7 +28,7 @@ async def verify_api_key(x_api_key: str = Header(...)):
     "/cost-summary",
     response_model=CostSummaryResponse,
     # Comment out API key authentication dependency
-    # dependencies=[Depends(verify_api_key)]
+    dependencies=[Depends(verify_api_key)]
 )
 async def get_cost_summary(request: CostSummaryRequest) -> CostSummaryResponse:
     """

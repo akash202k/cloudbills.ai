@@ -13,7 +13,7 @@ class Settings(BaseSettings):
     
     # Security
     API_KEY_HEADER: str = "X-API-Key"
-    API_KEY: str = "secret-key"
+    API_KEY: str = "u8Jk3vPz1Qw7Xy6Rz4Tn9Lm2Bc5Hs8Df"
     
     # AWS Settings
     AWS_ACCESS_KEY_ID: Optional[str] = None
@@ -22,7 +22,7 @@ class Settings(BaseSettings):
     AWS_PROFILE: Optional[str] = "doit"  # Add AWS profile support
     
     # Cache Settings
-    CACHE_TTL: int = 3600  # 1 hour in seconds
+    CACHE_TTL: int = 0  # 1 hour in seconds
     
     # Rate Limiting
     RATE_LIMIT_PER_MINUTE: int = 60
@@ -32,7 +32,7 @@ class Settings(BaseSettings):
         case_sensitive = True
 
 
-@lru_cache()
+# @lru_cache()
 def get_settings() -> Settings:
     """Get cached settings instance."""
     return Settings()

@@ -1,12 +1,13 @@
 from fastapi import FastAPI, Request
-from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 import logging
-import time
-from typing import Callable
+from dotenv import load_dotenv
 
 from aws.config import get_settings
 from aws.api.v1.endpoints import costs
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Configure logging
 logging.basicConfig(
@@ -27,25 +28,7 @@ app = FastAPI(
     debug=settings.DEBUG
 )
 
-# Comment out middleware setup
-# app.add_middleware(
-#     CORSMiddleware,
-#     allow_origins=["*"],
-#     allow_credentials=True,
-#     allow_methods=["*"],
-#     allow_headers=["*"],
-# )
-
-# Add request timing middleware
-# @app.middleware("http")
-# async def add_process_time_header(request: Request, call_next: Callable):
-#     start_time = time.time()
-#     response = await call_next(request)
-#     process_time = time.time() - start_time
-#     response.headers["X-Process-Time"] = str(process_time)
-#     return response
-
-# Add error handling middleware
+# Add error handling
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
     logger.error(f"Global error handler caught: {str(exc)}")
