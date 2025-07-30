@@ -2,6 +2,10 @@
 
 Backend API service for AWS cost analysis using FastAPI and AWS Cost Explorer.
 
+## Result 
+
+![alt text](image.png)
+
 ## Setup
 
 1. Create virtual environment:
